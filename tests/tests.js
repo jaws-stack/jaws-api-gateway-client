@@ -1,6 +1,7 @@
 var Client = require('../index')
 dotenv = require('dotenv'),
-  AWS = require('aws-sdk');
+  AWS = require('aws-sdk'),
+shortid = require('shortid');
 
 dotenv.load();
 
@@ -44,6 +45,22 @@ describe('Test client', function() {
       .catch(function(e) {
         done(e);
       });
+  });
+
+  it('restapis: create', function(done) {
+    this.timeout(0);
+
+    var body = {
+      name: 'test-rest-api-' + shortid.generate(),
+      description: 'temporary, test rest api'
+    };
+
+    client.createRestApi(body).then(function(response) {
+      console.log(response);
+      done();
+    }).catch(function(e) {
+          done(e);
+        });
   });
 
   it('stages: list', function(done) {
