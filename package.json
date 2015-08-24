@@ -1,0 +1,27 @@
+{
+  "name": "jaws-api-gateway-client",
+  "version": "0.0.1",
+  "description": "AWS API Gateway Client for the JAWS Framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests/tests"
+  },
+  "keywords": [
+    "jaws",
+    "serverless",
+    "framework",
+    "aws api gateway",
+    "api gateway"
+  ],
+  "author": "Austen Collins <austen@servant.co>",
+  "license": "MIT",
+  "dependencies": {
+    "aws4": "^1.0.4",
+    "bluebird": "^2.9.34"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.1.46",
+    "dotenv": "^1.2.0",
+    "mocha": "^2.2.5"
+  }
+}
