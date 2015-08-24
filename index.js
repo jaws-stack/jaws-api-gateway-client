@@ -10,7 +10,6 @@ function Client(options) {
   this.options = options;
 }
 
-
 /**
  * RestApis
  */
