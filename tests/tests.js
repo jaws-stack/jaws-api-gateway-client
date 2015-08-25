@@ -6,20 +6,18 @@ shortid = require('shortid');
 dotenv.load();
 
 // Test Data
-var test = {
+var testData = {
   credentials: new AWS.SharedIniFileCredentials({
     profile: process.env.profile
-  }),
-  restApiId: process.env.restApiId,
-  resourceId: process.env.resourceId
+  })
 };
 
 
 describe('Test client', function() {
 
   var client = new Client({
-    accessKeyId: test.credentials.accessKeyId,
-    secretAccessKey: test.credentials.secretAccessKey,
+    accessKeyId: testData.credentials.accessKeyId,
+    secretAccessKey: testData.credentials.secretAccessKey,
     region: 'us-east-1'
   });
 
@@ -27,18 +25,6 @@ describe('Test client', function() {
     this.timeout(0);
 
     client.listRestApis().then(function(response) {
-        console.log(response);
-        done();
-      })
-      .catch(function(e) {
-        done(e);
-      });
-  });
-
-  it('restapis: show by id', function(done) {
-    this.timeout(0);
-
-    client.showRestApi(test.restApiId).then(function(response) {
         console.log(response);
         done();
       })
@@ -57,28 +43,18 @@ describe('Test client', function() {
 
     client.createRestApi(body).then(function(response) {
       console.log(response);
+      testData.restApiId = response.id;
+      testData.restApiName = response.name;
       done();
     }).catch(function(e) {
-          done(e);
-        });
+      done(e);
+    });
   });
 
-  it('stages: list', function(done) {
+  it('restapis: show by id', function(done) {
     this.timeout(0);
 
-    client.listStages(test.restApiId).then(function(response) {
-        console.log(response);
-        done();
-      })
-      .catch(function(e) {
-        done(e);
-      });
-  });
-
-  it('deployments: list', function(done) {
-    this.timeout(0);
-
-    client.listDeployments(test.restApiId).then(function(response) {
+    client.showRestApi(testData.restApiId).then(function(response) {
         console.log(response);
         done();
       })
@@ -90,7 +66,31 @@ describe('Test client', function() {
   it('resources: list', function(done) {
     this.timeout(0);
 
-    client.listResources(test.restApiId).then(function(response) {
+    client.listResources(testData.restApiId).then(function(response) {
+      console.log(response);
+      testData.parentResourceId = response._embedded.item.id; // The default resource is a '/'
+      done();
+    }).catch(function(e) {
+          done(e);
+        });
+  });
+
+  it('resources: create', function(done) {
+    this.timeout(0);
+
+    client.createResource(testData.restApiId, testData.parentResourceId, 'users').then(function(response) {
+      console.log(response);
+      testData.childResourceId = response.id;
+      done();
+    }).catch(function(e) {
+      done(e);
+    });
+  });
+
+  it('stages: list', function(done) {
+    this.timeout(0);
+
+    client.listStages(testData.restApiId).then(function(response) {
         console.log(response);
         done();
       })
@@ -99,6 +99,16 @@ describe('Test client', function() {
       });
   });
 
+  it('deployments: list', function(done) {
+    this.timeout(0);
 
+    client.listDeployments(testData.restApiId).then(function(response) {
+        console.log(response);
+        done();
+      })
+      .catch(function(e) {
+        done(e);
+      });
+  });
 
 });

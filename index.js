@@ -75,6 +75,13 @@ Client.prototype.listResources = function(restApiId) {
   return request(this.options);
 }
 
+Client.prototype.createResource = function(restApiId, resourceParentId, pathPart) {
+  this.options.method = 'POST';
+  this.options.path = '/restapis/' + restApiId + '/resources/' + resourceParentId;
+  this.options.body = { pathPart: pathPart };
+  return request(this.options);
+}
+
 /**
  * Methods
  */
