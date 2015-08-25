@@ -28,9 +28,7 @@ describe('Test client', function() {
         console.log(response);
         done();
       })
-      .catch(function(e) {
-        done(e);
-      });
+        .catch(done);
   });
 
   it('restapis: create', function(done) {
@@ -46,9 +44,7 @@ describe('Test client', function() {
       testData.restApiId = response.id;
       testData.restApiName = response.name;
       done();
-    }).catch(function(e) {
-      done(e);
-    });
+    }).catch(done);
   });
 
   it('restapis: show by id', function(done) {
@@ -58,9 +54,7 @@ describe('Test client', function() {
         console.log(response);
         done();
       })
-      .catch(function(e) {
-        done(e);
-      });
+        .catch(done);
   });
 
   it('resources: list', function(done) {
@@ -70,9 +64,7 @@ describe('Test client', function() {
       console.log(response);
       testData.parentResourceId = response._embedded.item.id; // The default resource is a '/'
       done();
-    }).catch(function(e) {
-          done(e);
-        });
+    }).catch(done);
   });
 
   it('resources: create', function(done) {
@@ -82,9 +74,7 @@ describe('Test client', function() {
       console.log(response);
       testData.childResourceId = response.id;
       done();
-    }).catch(function(e) {
-      done(e);
-    });
+    }).catch(done);
   });
 
   it('stages: list', function(done) {
@@ -93,10 +83,7 @@ describe('Test client', function() {
     client.listStages(testData.restApiId).then(function(response) {
         console.log(response);
         done();
-      })
-      .catch(function(e) {
-        done(e);
-      });
+      }).catch(done);
   });
 
   it('deployments: list', function(done) {
@@ -106,9 +93,7 @@ describe('Test client', function() {
         console.log(response);
         done();
       })
-      .catch(function(e) {
-        done(e);
-      });
+        .catch(done);
   });
 
 });
