@@ -121,3 +121,10 @@ Client.prototype.showMethod = function(restApiId, resourceId, resourceMethod) {
   return request(this.options);
 };
 
+Client.prototype.deleteMethod = function(restApiId, resourceId, resourceMethod) {
+  this.options.method = 'DELETE';
+  this.options.path = '/restapis/' + restApiId + '/resources/' + resourceId + '/methods/' + resourceMethod.toUpperCase();
+  this.options.body = null;
+  return request(this.options);
+};
+

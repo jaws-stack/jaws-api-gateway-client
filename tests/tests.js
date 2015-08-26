@@ -131,6 +131,15 @@ describe('Test client', function() {
     }).catch(done);
   });
 
+  it('methods: delete', function(done) {
+    this.timeout(0);
+
+    client.deleteMethod(testData.restApiId, testData.childResourceId, 'GET').then(function(response) {
+      console.log(response);
+      done();
+    }).catch(done);
+  });
+
   it('stages: list', function(done) {
     this.timeout(0);
 
