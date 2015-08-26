@@ -21,16 +21,6 @@ describe('Test client', function() {
     region: 'us-east-1'
   });
 
-  it('restapis: list', function(done) {
-    this.timeout(0);
-
-    client.listRestApis().then(function(response) {
-        console.log(response);
-        done();
-      })
-        .catch(done);
-  });
-
   it('restapis: create', function(done) {
     this.timeout(0);
 
@@ -43,6 +33,15 @@ describe('Test client', function() {
       console.log(response);
       testData.restApiId = response.id;
       testData.restApiName = response.name;
+      done();
+    }).catch(done);
+  });
+
+  it('restapis: list', function(done) {
+    this.timeout(0);
+
+    client.listRestApis().then(function(response) {
+      console.log(response);
       done();
     }).catch(done);
   });

@@ -17,14 +17,14 @@ function Client(options) {
 Client.prototype.listRestApis = function() {
   this.options.method = 'GET';
   this.options.path = '/restapis';
-  this.options.body = '';
+  this.options.body = null;
   return request(this.options);
 };
 
 Client.prototype.showRestApi = function(restApiId) {
   this.options.method = 'GET';
   this.options.path = '/restapis/' + restApiId;
-  this.options.body = '';
+  this.options.body = null;
   return request(this.options);
 };
 
@@ -38,7 +38,7 @@ Client.prototype.createRestApi = function(body) {
 Client.prototype.deleteRestApi = function(restApiId) {
   this.options.method = 'DELETE';
   this.options.path = '/restapis/' + restApiId;
-  this.options.body = '';
+  this.options.body = null;
   return request(this.options);
 };
 
@@ -49,7 +49,7 @@ Client.prototype.deleteRestApi = function(restApiId) {
 Client.prototype.listStages = function(restApiId) {
   this.options.method = 'POST';
   this.options.path = '/restapis/' + restApiId + '/stages';
-  this.options.body = '';
+  this.options.body = null;
   return request(this.options);
 }
 
@@ -67,7 +67,7 @@ Client.prototype.createStage = function(restApiId, body) {
 Client.prototype.listDeployments = function(restApiId) {
   this.options.method = 'GET';
   this.options.path = '/restapis/' + restApiId + '/deployments';
-  this.options.body = '';
+  this.options.body = null;
   return request(this.options);
 }
 
@@ -78,7 +78,7 @@ Client.prototype.listDeployments = function(restApiId) {
 Client.prototype.listResources = function(restApiId) {
   this.options.method = 'GET';
   this.options.path = '/restapis/' + restApiId + '/resources';
-  this.options.body = '';
+  this.options.body = null;
   return request(this.options);
 }
 
@@ -92,8 +92,7 @@ Client.prototype.createResource = function(restApiId, resourceParentId, pathPart
 Client.prototype.deleteResource = function(restApiId, resourceId) {
   this.options.method = 'DELETE';
   this.options.path = '/restapis/' + restApiId + '/resources/' + resourceId;
-  this.options.body = '';
-  console.log(this.options);
+  this.options.body = null;
   return request(this.options);
 }
 
