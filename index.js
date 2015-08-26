@@ -19,21 +19,28 @@ Client.prototype.listRestApis = function() {
   this.options.path = '/restapis';
   this.options.body = '';
   return request(this.options);
-}
+};
 
 Client.prototype.showRestApi = function(restApiId) {
   this.options.method = 'GET';
   this.options.path = '/restapis/' + restApiId;
   this.options.body = '';
   return request(this.options);
-}
+};
 
 Client.prototype.createRestApi = function(body) {
   this.options.method = 'POST';
   this.options.path = '/restapis';
   this.options.body = body;
   return request(this.options);
-}
+};
+
+Client.prototype.deleteRestApi = function(restApiId) {
+  this.options.method = 'DELETE';
+  this.options.path = '/restapis/' + restApiId;
+  this.options.body = '';
+  return request(this.options);
+};
 
 /**
  * Stages
@@ -79,6 +86,14 @@ Client.prototype.createResource = function(restApiId, resourceParentId, pathPart
   this.options.method = 'POST';
   this.options.path = '/restapis/' + restApiId + '/resources/' + resourceParentId;
   this.options.body = { pathPart: pathPart };
+  return request(this.options);
+}
+
+Client.prototype.deleteResource = function(restApiId, resourceId) {
+  this.options.method = 'DELETE';
+  this.options.path = '/restapis/' + restApiId + '/resources/' + resourceId;
+  this.options.body = '';
+  console.log(this.options);
   return request(this.options);
 }
 

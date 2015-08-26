@@ -77,6 +77,25 @@ describe('Test client', function() {
     }).catch(done);
   });
 
+  it('resources: create 2', function(done) {
+    this.timeout(0);
+
+    client.createResource(testData.restApiId, testData.parentResourceId, 'events').then(function(response) {
+      console.log(response);
+      testData.tempResourceId = response.id;
+      done();
+    }).catch(done);
+  });
+
+  it('resources: delete', function(done) {
+    this.timeout(0);
+
+    client.deleteResource(testData.restApiId, testData.tempResourceId).then(function(response) {
+      console.log(response);
+      done();
+    }).catch(done);
+  });
+
   it('stages: list', function(done) {
     this.timeout(0);
 
@@ -93,6 +112,16 @@ describe('Test client', function() {
         console.log(response);
         done();
       })
+        .catch(done);
+  });
+
+  it('restapis: delete', function(done) {
+    this.timeout(0);
+
+    client.deleteRestApi(testData.restApiId).then(function(response) {
+      console.log(response);
+      done();
+    })
         .catch(done);
   });
 
