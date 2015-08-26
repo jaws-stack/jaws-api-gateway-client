@@ -86,10 +86,46 @@ describe('Test client', function() {
     }).catch(done);
   });
 
+  it('resources: show', function(done) {
+    this.timeout(0);
+
+    client.showResource(testData.restApiId, testData.childResourceId).then(function(response) {
+      console.log(response);
+      done();
+    }).catch(done);
+  });
+
   it('resources: delete', function(done) {
     this.timeout(0);
 
     client.deleteResource(testData.restApiId, testData.tempResourceId).then(function(response) {
+      console.log(response);
+      done();
+    }).catch(done);
+  });
+
+  it('methods: create', function(done) {
+    this.timeout(0);
+
+    var method = {
+      "authorizationType" : "none",
+      "apiKeyRequired" : false,
+      "requestParameters" : {
+        "method.request.querystring.access_token": true
+      },
+      "requestModels" : {}
+    };
+
+    client.createMethod(testData.restApiId, testData.childResourceId, 'GET', method).then(function(response) {
+      console.log(response);
+      done();
+    }).catch(done);
+  });
+
+  it('methods: show', function(done) {
+    this.timeout(0);
+
+    client.showMethod(testData.restApiId, testData.childResourceId, 'GET').then(function(response) {
       console.log(response);
       done();
     }).catch(done);
