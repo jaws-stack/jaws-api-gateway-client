@@ -105,10 +105,24 @@ Client.prototype.deleteMethod = function(restApiId, resourceId, resourceMethod) 
 
 Client.prototype.createIntegration = function(restApiId, resourceId, resourceMethod, body) {
   this.options.method = 'PUT';
-  this.options.path = '/restapis/' + restApiId + '/resources/' + resourceId + '/methods/' + resourceMethod.toUpperCase();
+  this.options.path = '/restapis/' + restApiId + '/resources/' + resourceId + '/methods/' + resourceMethod.toUpperCase() + '/integration';
   this.options.body = body;
   return request(this.options);
-}
+};
+
+Client.prototype.showIntegration = function(restApiId, resourceId, resourceMethod, integrationId) {
+  this.options.method = 'GET';
+  this.options.path = '/restapis/' + restApiId + '/resources/' + resourceId + '/methods/' + resourceMethod.toUpperCase() + '/integration/' + integrationId;
+  this.options.body = null;
+  return request(this.options);
+};
+
+Client.prototype.deleteIntegration = function(restApiId, resourceId, resourceMethod, integrationId) {
+  this.options.method = 'DELETE';
+  this.options.path = '/restapis/' + restApiId + '/resources/' + resourceId + '/methods/' + resourceMethod.toUpperCase() + '/integration/' + integrationId;
+  this.options.body = null;
+  return request(this.options);
+};
 
 /**
  * Stages
