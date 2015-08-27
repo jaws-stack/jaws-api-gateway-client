@@ -131,6 +131,20 @@ describe('Test client', function() {
     }).catch(done);
   });
 
+  //it('integrations: create', function(done) {
+  //  this.timeout(0);
+  //
+  //  var integration = {
+  //
+  //  };
+  //
+  //  client.createIntegration(testData.restApiId, testData.childResourceId, 'GET', integration).then(function(response) {
+  //    console.log(response);
+  //    done();
+  //  }).catch(done);
+  //});
+
+
   it('methods: delete', function(done) {
     this.timeout(0);
 
@@ -138,15 +152,6 @@ describe('Test client', function() {
       console.log(response);
       done();
     }).catch(done);
-  });
-
-  it('stages: list', function(done) {
-    this.timeout(0);
-
-    client.listStages(testData.restApiId).then(function(response) {
-        console.log(response);
-        done();
-      }).catch(done);
   });
 
   it('deployments: list', function(done) {

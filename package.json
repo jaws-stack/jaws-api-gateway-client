@@ -1,6 +1,6 @@
 {
   "name": "jaws-api-gateway-client",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "AWS API Gateway Client for the JAWS Framework",
   "main": "index.js",
   "scripts": {
