@@ -10,6 +10,8 @@ function Client(options) {
   this.options = options;
 }
 
+// TODO: Make these names resemble the API Gateway REST API more closely
+
 /**
  * RestApis
  */
@@ -78,24 +80,10 @@ Client.prototype.deleteResource = function(restApiId, resourceId) {
  * Methods
  */
 
-Client.prototype.createMethod = function(restApiId, resourceId, resourceMethod, body) {
+Client.prototype.putMethod = function(restApiId, resourceId, resourceMethod, body) {
   this.options.method = 'PUT';
   this.options.path = '/restapis/' + restApiId + '/resources/' + resourceId + '/methods/' + resourceMethod.toUpperCase();
   this.options.body = body;
-  return request(this.options);
-};
-
-Client.prototype.showMethod = function(restApiId, resourceId, resourceMethod) {
-  this.options.method = 'GET';
-  this.options.path = '/restapis/' + restApiId + '/resources/' + resourceId + '/methods/' + resourceMethod.toUpperCase();
-  this.options.body = null;
-  return request(this.options);
-};
-
-Client.prototype.deleteMethod = function(restApiId, resourceId, resourceMethod) {
-  this.options.method = 'DELETE';
-  this.options.path = '/restapis/' + restApiId + '/resources/' + resourceId + '/methods/' + resourceMethod.toUpperCase();
-  this.options.body = null;
   return request(this.options);
 };
 
@@ -103,24 +91,33 @@ Client.prototype.deleteMethod = function(restApiId, resourceId, resourceMethod) 
  * Integrations
  */
 
-Client.prototype.createIntegration = function(restApiId, resourceId, resourceMethod, body) {
+Client.prototype.putIntegration = function(restApiId, resourceId, resourceMethod, body) {
   this.options.method = 'PUT';
   this.options.path = '/restapis/' + restApiId + '/resources/' + resourceId + '/methods/' + resourceMethod.toUpperCase() + '/integration';
   this.options.body = body;
   return request(this.options);
 };
 
-Client.prototype.showIntegration = function(restApiId, resourceId, resourceMethod, integrationId) {
-  this.options.method = 'GET';
-  this.options.path = '/restapis/' + restApiId + '/resources/' + resourceId + '/methods/' + resourceMethod.toUpperCase() + '/integration/' + integrationId;
-  this.options.body = null;
+/**
+ * Method Response
+ */
+
+Client.prototype.putMethodResponse = function(restApiId, resourceId, resourceMethod, statusCode, body) {
+  this.options.method = 'PUT';
+  this.options.path = '/restapis/' + restApiId + '/resources/' + resourceId + '/methods/' + resourceMethod.toUpperCase() + '/responses/' + statusCode;
+  this.options.body = body;
   return request(this.options);
 };
 
-Client.prototype.deleteIntegration = function(restApiId, resourceId, resourceMethod, integrationId) {
-  this.options.method = 'DELETE';
-  this.options.path = '/restapis/' + restApiId + '/resources/' + resourceId + '/methods/' + resourceMethod.toUpperCase() + '/integration/' + integrationId;
-  this.options.body = null;
+
+/**
+ * Integration Response
+ */
+
+Client.prototype.putIntegrationResponse = function(restApiId, resourceId, resourceMethod, statusCode, body) {
+  this.options.method = 'PUT';
+  this.options.path = '/restapis/' + restApiId + '/resources/' + resourceId + '/methods/' + resourceMethod.toUpperCase() + '/integration/responses/' + statusCode;
+  this.options.body = body;
   return request(this.options);
 };
 

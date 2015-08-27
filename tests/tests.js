@@ -104,7 +104,7 @@ describe('Test client', function() {
     }).catch(done);
   });
 
-  it('methods: create', function(done) {
+  it('methods: put', function(done) {
     this.timeout(0);
 
     var method = {
@@ -116,39 +116,7 @@ describe('Test client', function() {
       "requestModels" : {}
     };
 
-    client.createMethod(testData.restApiId, testData.childResourceId, 'GET', method).then(function(response) {
-      console.log(response);
-      done();
-    }).catch(done);
-  });
-
-  it('methods: show', function(done) {
-    this.timeout(0);
-
-    client.showMethod(testData.restApiId, testData.childResourceId, 'GET').then(function(response) {
-      console.log(response);
-      done();
-    }).catch(done);
-  });
-
-  //it('integrations: create', function(done) {
-  //  this.timeout(0);
-  //
-  //  var integration = {
-  //
-  //  };
-  //
-  //  client.createIntegration(testData.restApiId, testData.childResourceId, 'GET', integration).then(function(response) {
-  //    console.log(response);
-  //    done();
-  //  }).catch(done);
-  //});
-
-
-  it('methods: delete', function(done) {
-    this.timeout(0);
-
-    client.deleteMethod(testData.restApiId, testData.childResourceId, 'GET').then(function(response) {
+    client.putMethod(testData.restApiId, testData.childResourceId, 'GET', method).then(function(response) {
       console.log(response);
       done();
     }).catch(done);
