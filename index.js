@@ -126,27 +126,48 @@ Client.prototype.putIntegrationResponse = function(restApiId, resourceId, resour
  */
 
 Client.prototype.listStages = function(restApiId) {
-  this.options.method = 'POST';
+  this.options.method = 'GET';
   this.options.path = '/restapis/' + restApiId + '/stages';
   this.options.body = null;
   return request(this.options);
-}
+};
 
-Client.prototype.createStage = function(restApiId, body) {
+Client.prototype.putStage = function(restApiId, body) {
   this.options.method = 'POST';
   this.options.path = '/restapis/' + restApiId + '/stages';
   this.options.body = body;
   return request(this.options);
-}
+};
+
+Client.prototype.showStage = function(restApiId, stageName) {
+  this.options.method = 'GET';
+  this.options.path = '/restapis/' + restApiId + '/stages/' + stageName.toLowerCase();
+  this.options.body = null;
+  return request(this.options);
+};
+
+Client.prototype.deleteStage = function(restApiId, stageName) {
+  this.options.method = 'DELETE';
+  this.options.path = '/restapis/' + restApiId + '/stages/' + stageName.toLowerCase();
+  this.options.body = null;
+  return request(this.options);
+};
 
 /**
  * Deployments
  */
+
+Client.prototype.createDeployment = function(restApiId, body) {
+  this.options.method = 'POST';
+  this.options.path = '/restapis/' + restApiId + '/deployments';
+  this.options.body = body;
+  return request(this.options);
+};
 
 Client.prototype.listDeployments = function(restApiId) {
   this.options.method = 'GET';
   this.options.path = '/restapis/' + restApiId + '/deployments';
   this.options.body = null;
   return request(this.options);
-}
+};
 

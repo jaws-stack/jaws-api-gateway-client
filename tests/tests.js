@@ -122,15 +122,46 @@ describe('Test client', function() {
     }).catch(done);
   });
 
-  it('deployments: list', function(done) {
+  it('stages: list', function(done) {
     this.timeout(0);
 
-    client.listDeployments(testData.restApiId).then(function(response) {
-        console.log(response);
-        done();
-      })
+    client.listStages(testData.restApiId).then(function(response) {
+      console.log(response);
+      done();
+    })
         .catch(done);
   });
+
+  it('stages: create', function(done) {
+    this.timeout(0);
+
+    client.putStage(testData.restApiId, 'dev').then(function(response) {
+      console.log(response);
+      done();
+    })
+        .catch(done);
+  });
+
+  it('stages: show', function(done) {
+    this.timeout(0);
+
+    client.showStage(testData.restApiId, 'dev').then(function(response) {
+      console.log(response);
+      done();
+    })
+        .catch(done);
+  });
+
+  it('stages: delete', function(done) {
+    this.timeout(0);
+
+    client.deleteStage(testData.restApiId, 'dev').then(function(response) {
+      console.log(response);
+      done();
+    })
+        .catch(done);
+  });
+
 
   it('restapis: delete', function(done) {
     this.timeout(0);
