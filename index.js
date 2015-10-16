@@ -50,9 +50,30 @@ Client.prototype.deleteRestApi = function(restApiId) {
 
 Client.prototype.listResources = function(restApiId) {
   this.options.method = 'GET';
-  this.options.path = '/restapis/' + restApiId + '/resources';
+  this.options.path = '/restapis/' + restApiId + '/resources?limit=500';
   this.options.body = null;
-  return request(this.options);
+
+  var items = [];
+  var self = this;
+
+  var getNextPage = function() {
+    return request(self.options).then(function(response) {
+      var resources = response._embedded.item;
+      if (!Array.isArray(resources)) resources = [resources];
+
+      items = items.concat( resources );
+
+      if(response._links && response._links.next && response._links.next.href) {
+        self.options.path = response._links.next.href;
+
+        return( getNextPage() );
+      } else {
+        return( items );
+      }
+    });
+  };
+
+  return( getNextPage() );
 };
 
 Client.prototype.createResource = function(restApiId, resourceParentId, pathPart) {
